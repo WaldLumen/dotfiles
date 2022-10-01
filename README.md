@@ -1,5 +1,5 @@
 # dotfiles
 
-![alt text](https://github.com/Selessal/dotfiles/tree/main/wallpapers)
+![alt text](https://github.com/Selessal/dotfiles/tree/main/wallpaper raw=true "Title")
 
           
