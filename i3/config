@@ -2,20 +2,41 @@ set $mod Mod4
 
 font JetBrainsMonoMedium Nerd 
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec_always --no-startup-id killall polybar
+# languages
+exec_always --no-startup-id setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle,grp_led:scroll'
+
+# polybar
+exec_always --no-startup-id polybar
+exec_always --no-startup-id sh .config/polybar/launch.sh
+
+# wlan gui
 exec --no-startup-id nm-applet
+
+# microphone noise suppression
 exec_always --no-startup-id noisetorch -u
-exec_always --no-startup-id wal -R
-exec_always --no-startup-id dunst -conf ~/.config/dunst/dunstrc
-exec --no-startup-id gnome-keyring-daemon --start &
 exec_always --no-startup-id noisetorch -s "alsa_input.usb-0c76_USB_PnP_Audio_Device-00.mono-fallback" -i
+
+# colorsceme
+exec_always --no-startup-id wal -R
+
+#notifications 
+exec_always --no-startup-id dunst -conf ~/.config/dunst/dunstrc
+
+#???
+exec --no-startup-id gnome-keyring-daemon --start &
+
+# Picom
 exec_always --no-startup-id picom
-exec_always --no-startup-id polybar 
+
+# utility which provides a large array of audio effects
 exec_always --no-startup-id easyeffects --gapplication-service
+
+# wallpaper
 exec_always --no-startup-id feh --bg-scale /home/silvia/Pictures/Wallpapers/wallpapaer.jpg 
+
+# second monitor
 exec_always --no-startup-id xrandr --output DP-3 --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal 
+
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -25,22 +46,17 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-#wallpaper
-exec --no-startup-id nitrogen
-
 #postgress.services
 exec --no-startup-id systemctl start postgresql.service
 
-# start a terminal
+# start terminal
 bindsym $mod+Return exec alacritty
-
 
 # kill focused window
 bindsym $mod+q kill
 
 # screenshot
 bindsym $mod+p exec flameshot gui  -p ~/Pictures/Screenshots
-
 
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -show drun -display-drun "> "
@@ -73,6 +89,7 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+
 # split in horizontal orientation
 bindsym $mod+h split h
 
@@ -95,6 +112,7 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
 
 # Define names for default workspaces for which we configure key bindings later.
 set $ws1 "1"
@@ -137,6 +155,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -152,13 +171,14 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+
 # class                 border  backgr. text    indicator child_border                                                                     
 client.focused_inactive #2b3339 #2b3339 #2b3339 #2b3339 #2b3339
 client.unfocused        #2b3339 #2b3339 #2b3339 #2b3339 #2b3339                                                                            
 client.focused          #d4be98 #d4be98 #d4be98 #d4be98 #d4be98 
 
 for_window [class="^.*"] border pixel 3
-gaps inner 1
+gaps inner 3
 # smart_borders on
 # smart_gaps on
 gaps outer 6
