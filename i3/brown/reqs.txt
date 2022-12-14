@@ -1,0 +1,8 @@
+polybar
+nvim
+redshift
+rofi
+zathura
+alacritty
+spicetify
+
