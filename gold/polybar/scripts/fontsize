@@ -1,3 +1,0 @@
-#!/bin/bash
-
-printf "\033]710;xft:Source Code Pro for Powerline:pixelsize=$(($1 + 5))\007"
